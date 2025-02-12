@@ -57,11 +57,9 @@ public class Candidate {
 
     @Override
     public String toString() {
-        return "Candidate{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                '}';
+        return "Candidate " +
+                "firstName= '" + firstName + '\'' +
+                ", lastName= '" + lastName + '\'' +
+                ", email= '" + email + '\'';
     }
 }
