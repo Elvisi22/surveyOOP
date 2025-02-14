@@ -20,7 +20,7 @@ public class Service {
                 responseCounts.put(response, responseCounts.getOrDefault(response, 0) + 1);
             }
 
-            for (var entry : responseCounts.entrySet()) {
+            for (Map.Entry<Alternativa, Integer> entry : responseCounts.entrySet()) {
                 System.out.println(entry.getKey() + ": " + entry.getValue());
             }
             System.out.println();
@@ -38,19 +38,6 @@ public class Service {
 
         return Collections.max(participationCount.entrySet(), Map.Entry.comparingByValue()).getKey();
     }
-
-//    public static void removeLowResponseQuestions(SurveyClass survey) {
-//        List<Question> toRemove = new ArrayList<>();
-//        int totalCandidates = survey.getCandidates().size();
-//
-//        for (Question question : survey.getQuestionSet()) {
-//            if (question.getResponseCount() < totalCandidates / 2) {
-//                toRemove.add(question);
-//            }
-//        }
-//
-//        survey.getQuestionSet().removeAll(toRemove);
-//    }
 
     public static boolean validateSurvey(SurveyClass survey) {
         return survey.getQuestionSet().size() >= 10 && survey.getQuestionSet().size() <= 40;
