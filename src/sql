@@ -1,0 +1,36 @@
+1.
+SELECT customerNumber, COUNT(orderNumber) AS totalOrders
+FROM orders
+GROUP BY customerNumber
+HAVING COUNT(orderNumber) = (
+    SELECT MAX(order_count)
+    FROM (SELECT COUNT(orderNumber) AS order_count FROM orders GROUP BY customerNumber) AS subquery
+);
+2.
+SELECT c.customerNumber, c.customerName, o.orderNumber, od.productCode, od.quantityOrdered, od.priceEach
+FROM customers c
+JOIN orders o ON c.customerNumber = o.customerNumber
+JOIN orderdetails od ON o.orderNumber = od.orderNumber
+WHERE c.country = 'Germany';
+3.
+SELECT e.employeeNumber, e.firstName, e.lastName, SUM(p.amount) AS totalRevenue
+FROM employees e
+JOIN customers c ON e.employeeNumber = c.salesRepEmployeeNumber
+JOIN payments p ON c.customerNumber = p.customerNumber
+GROUP BY e.employeeNumber, e.firstName, e.lastName;
+4.
+SELECT DISTINCT p.productCode, p.productName
+FROM products p
+JOIN orderdetails od ON p.productCode = od.productCode
+JOIN orders o ON od.orderNumber = o.orderNumber
+WHERE o.orderDate BETWEEN '2004-12-01' AND '2004-12-31';
+5.
+CREATE TABLE employeedetails (
+    employeeDetailID INT AUTO_INCREMENT PRIMARY KEY,
+    employeeNumber INT,
+    bankAccount VARCHAR(50),
+    address TEXT,
+    phoneNumber VARCHAR(20),
+    personalEmail VARCHAR(100),
+    FOREIGN KEY (employeeNumber) REFERENCES employees(employeeNumber) ON DELETE CASCADE
+);
